@@ -1,5 +1,6 @@
 package fr.ozoneprojects.open_weather_map_client.internal
 
+import fr.ozoneprojects.open_weather_map_client.internal.core.NetworkModule
 import fr.ozoneprojects.open_weather_map_client.internal.models.FullWeatherForecast
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,6 +18,11 @@ internal interface OpenWeatherMapApi {
     ): FullWeatherForecast
 
     companion object {
+
+        val service: OpenWeatherMapApi by lazy {
+            NetworkModule.retrofit.create(OpenWeatherMapApi::class.java)
+        }
+
         const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
         const val API_KEY = "azertyuiop"
     }
