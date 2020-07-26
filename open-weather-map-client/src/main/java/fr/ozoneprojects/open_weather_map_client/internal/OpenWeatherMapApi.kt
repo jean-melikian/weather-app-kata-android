@@ -1,7 +1,7 @@
 package fr.ozoneprojects.open_weather_map_client.internal
 
 import fr.ozoneprojects.open_weather_map_client.internal.core.NetworkModule
-import fr.ozoneprojects.open_weather_map_client.internal.models.FullWeatherForecast
+import fr.ozoneprojects.open_weather_map_client.models.datasource.OpenWeatherOneCallResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -15,7 +15,7 @@ internal interface OpenWeatherMapApi {
         @Query("appid") apiKey: String,
         @Query("units") units: String = "metric",
         @Query("lang") language: String
-    ): FullWeatherForecast
+    ): OpenWeatherOneCallResponse
 
     companion object {
 

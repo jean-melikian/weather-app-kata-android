@@ -1,10 +1,12 @@
 package fr.ozoneprojects.open_weather_map_client.internal
 
 import fr.ozoneprojects.open_weather_map_client.WeatherRepository
-import fr.ozoneprojects.open_weather_map_client.internal.models.FullWeatherForecast
-import fr.ozoneprojects.open_weather_map_client.internal.models.GenericError
-import fr.ozoneprojects.open_weather_map_client.internal.models.Response
-import fr.ozoneprojects.open_weather_map_client.internal.models.Success
+import fr.ozoneprojects.open_weather_map_client.models.GenericError
+import fr.ozoneprojects.open_weather_map_client.models.Response
+import fr.ozoneprojects.open_weather_map_client.models.Success
+import fr.ozoneprojects.open_weather_map_client.models.datasource.OpenWeatherOneCallResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 internal class WeatherRepositoryImpl(
     private val openWeatherMapApi: OpenWeatherMapApi

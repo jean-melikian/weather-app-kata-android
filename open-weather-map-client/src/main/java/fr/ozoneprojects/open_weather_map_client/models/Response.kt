@@ -1,4 +1,4 @@
-package fr.ozoneprojects.open_weather_map_client.internal.models
+package fr.ozoneprojects.open_weather_map_client.models
 
 sealed class Response<T>
 
