@@ -28,6 +28,12 @@ allprojects {
     }
 }
 
+def getApiKey(){
+    def Properties props = new Properties()
+    props.load(new FileInputStream(new File('secrets.properties')))
+    return props['OPEN_WEATHER_MAP_API_KEY']
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

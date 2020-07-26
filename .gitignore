@@ -8,6 +8,9 @@
 .externalNativeBuild
 .cxx
 
+### Project specific
+secrets.properties
+
 ### Android template
 # Built application files
 *.apk
