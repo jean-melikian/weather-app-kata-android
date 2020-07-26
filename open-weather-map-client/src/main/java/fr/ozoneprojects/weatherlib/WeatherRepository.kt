@@ -1,9 +1,9 @@
-package fr.ozoneprojects.open_weather_map_client
+package fr.ozoneprojects.weatherlib
 
-import fr.ozoneprojects.open_weather_map_client.internal.OpenWeatherMapApi
-import fr.ozoneprojects.open_weather_map_client.internal.WeatherRepositoryImpl
-import fr.ozoneprojects.open_weather_map_client.models.Response
-import fr.ozoneprojects.open_weather_map_client.models.datasource.OpenWeatherOneCallResponse
+import fr.ozoneprojects.weatherlib.internal.OpenWeatherMapApi
+import fr.ozoneprojects.weatherlib.internal.WeatherRepositoryImpl
+import fr.ozoneprojects.weatherlib.models.Response
+import fr.ozoneprojects.weatherlib.models.datasource.OpenWeatherOneCallResponse
 
 interface WeatherRepository {
     suspend fun getWeatherForecastForLocation(

@@ -1,7 +1,7 @@
-package fr.ozoneprojects.open_weather_map_client.internal
+package fr.ozoneprojects.weatherlib.internal
 
-import fr.ozoneprojects.open_weather_map_client.internal.core.NetworkModule
-import fr.ozoneprojects.open_weather_map_client.models.datasource.OpenWeatherOneCallResponse
+import fr.ozoneprojects.weatherlib.internal.core.NetworkModule
+import fr.ozoneprojects.weatherlib.models.datasource.OpenWeatherOneCallResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

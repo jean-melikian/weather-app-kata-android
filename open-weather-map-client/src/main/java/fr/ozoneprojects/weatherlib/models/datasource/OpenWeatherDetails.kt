@@ -1,4 +1,4 @@
-package fr.ozoneprojects.open_weather_map_client.models.datasource
+package fr.ozoneprojects.weatherlib.models.datasource
 
 import com.squareup.moshi.Json
 

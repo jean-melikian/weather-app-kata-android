@@ -1,10 +1,10 @@
-package fr.ozoneprojects.open_weather_map_client.internal
+package fr.ozoneprojects.weatherlib.internal
 
-import fr.ozoneprojects.open_weather_map_client.WeatherRepository
-import fr.ozoneprojects.open_weather_map_client.models.GenericError
-import fr.ozoneprojects.open_weather_map_client.models.Response
-import fr.ozoneprojects.open_weather_map_client.models.Success
-import fr.ozoneprojects.open_weather_map_client.models.datasource.OpenWeatherOneCallResponse
+import fr.ozoneprojects.weatherlib.WeatherRepository
+import fr.ozoneprojects.weatherlib.models.GenericError
+import fr.ozoneprojects.weatherlib.models.Response
+import fr.ozoneprojects.weatherlib.models.Success
+import fr.ozoneprojects.weatherlib.models.datasource.OpenWeatherOneCallResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

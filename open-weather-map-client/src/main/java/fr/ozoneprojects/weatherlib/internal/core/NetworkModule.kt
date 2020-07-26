@@ -1,8 +1,8 @@
-package fr.ozoneprojects.open_weather_map_client.internal.core
+package fr.ozoneprojects.weatherlib.internal.core
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import fr.ozoneprojects.open_weather_map_client.internal.OpenWeatherMapApi
+import fr.ozoneprojects.weatherlib.internal.OpenWeatherMapApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
