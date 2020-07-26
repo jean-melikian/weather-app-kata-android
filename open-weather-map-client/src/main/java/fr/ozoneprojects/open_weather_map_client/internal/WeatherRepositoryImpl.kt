@@ -17,17 +17,20 @@ internal class WeatherRepositoryImpl(
         apiKey: String,
         units: String,
         language: String
-    ): Response<FullWeatherForecast> = try {
-        Success(
-            openWeatherMapApi.getWeatherForecastForLocation(
-                latitude,
-                longitude,
-                apiKey,
-                units,
-                language
+    ): Response<OpenWeatherOneCallResponse> = withContext(Dispatchers.IO) {
+        try {
+            Success(
+                openWeatherMapApi.getWeatherForecastForLocation(
+                    latitude,
+                    longitude,
+                    apiKey,
+                    units,
+                    language
+                )
             )
-        )
-    } catch (t: Throwable) {
-        GenericError(t)
+        } catch (t: Throwable) {
+            t.printStackTrace()
+            GenericError<OpenWeatherOneCallResponse>(t)
+        }
     }
 }
