@@ -9,10 +9,13 @@ interface WeatherRepository {
     suspend fun getWeatherForecastForLocation(
         latitude: Double,
         longitude: Double,
-        apiKey: String,
         units: String = "metric",
         language: String = "fr"
     ): Response<OpenWeatherOneCallResponse>
 }
 
+object WeatherRepositoryFactory {
+    fun create(apiKey: String): WeatherRepository =
+        WeatherRepositoryImpl(apiKey, OpenWeatherMapApi.service)
+}
 

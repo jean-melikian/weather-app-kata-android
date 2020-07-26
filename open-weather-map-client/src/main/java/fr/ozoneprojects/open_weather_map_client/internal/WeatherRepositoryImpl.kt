@@ -9,12 +9,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 internal class WeatherRepositoryImpl(
+    private val apiKey: String,
     private val openWeatherMapApi: OpenWeatherMapApi
 ) : WeatherRepository {
     override suspend fun getWeatherForecastForLocation(
         latitude: Double,
         longitude: Double,
-        apiKey: String,
         units: String,
         language: String
     ): Response<OpenWeatherOneCallResponse> = withContext(Dispatchers.IO) {
