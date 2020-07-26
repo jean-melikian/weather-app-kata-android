@@ -61,6 +61,7 @@ dependencies {
 
     // -- WeatherAppKata --
     implementation project(":open-weather-map-client")
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Tests
     testImplementation "junit:junit:$junit_version"

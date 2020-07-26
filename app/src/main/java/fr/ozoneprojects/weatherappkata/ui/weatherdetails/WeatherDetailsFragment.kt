@@ -4,43 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import fr.ozoneprojects.weatherappkata.R
 import fr.ozoneprojects.weatherappkata.core.unixToPrettyFormat
 import fr.ozoneprojects.weatherappkata.databinding.WeatherDetailsFragmentBinding
+import fr.ozoneprojects.weatherappkata.ui.ViewBindingFragment
 import fr.ozoneprojects.weatherlib.WeatherIconMapper
 import fr.ozoneprojects.weatherlib.models.datasource.OpenWeatherOneCallResponse
 import java.util.*
 import kotlin.math.roundToInt
 
-class WeatherDetailsFragment : Fragment(R.layout.weather_details_fragment) {
+class WeatherDetailsFragment :
+    ViewBindingFragment<WeatherDetailsFragmentBinding>(R.layout.weather_details_fragment) {
 
     private val parisCoordinates: Pair<Double, Double> = 48.8534 to 2.3488
 
     private val viewModel: WeatherDetailsViewModel by activityViewModels()
 
-    private var _binding: WeatherDetailsFragmentBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = WeatherDetailsFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    ): View? = bindView(WeatherDetailsFragmentBinding.inflate(inflater, container, false))
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
