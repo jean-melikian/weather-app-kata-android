@@ -49,6 +49,7 @@ Activity(ViewModel)<->Fragment(ViewModel)<->ViewModel(LiveData, Repository)<->Re
 
 ### What could be improved
 
+- Implement Hilt (Dagger) for dependency injection, to ease testing
 - Unit testing on ViewModels (verify on each LiveData states) and on Repositories.
 - Get Places SDK listener out of the Fragment.
 - Better looking UI.
