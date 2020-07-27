@@ -73,7 +73,7 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     // -- WeatherAppKata --
-    implementation project(":open-weather-map-client")
+    implementation project(":weatherlib")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Tests
