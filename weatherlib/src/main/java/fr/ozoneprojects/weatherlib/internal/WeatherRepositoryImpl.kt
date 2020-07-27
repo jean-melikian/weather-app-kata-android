@@ -19,15 +19,16 @@ internal class WeatherRepositoryImpl(
         language: String
     ): Response<OpenWeatherOneCallResponse> = withContext(Dispatchers.IO) {
         try {
-            Success(
-                openWeatherMapApi.getWeatherForecastForLocation(
-                    latitude,
-                    longitude,
-                    apiKey,
-                    units,
-                    language
-                )
+            val result = openWeatherMapApi.getWeatherForecastForLocation(
+                latitude,
+                longitude,
+                apiKey,
+                units,
+                language
             )
+            if (result != null) {
+                Success(result)
+            } else GenericError<OpenWeatherOneCallResponse>(Exception("An error occurred"))
         } catch (t: Throwable) {
             t.printStackTrace()
             GenericError<OpenWeatherOneCallResponse>(t)

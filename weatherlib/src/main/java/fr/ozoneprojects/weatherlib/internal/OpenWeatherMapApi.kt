@@ -14,7 +14,7 @@ internal interface OpenWeatherMapApi {
         @Query("lon") longitude: Double,
         @Query("appid") apiKey: String,
         @Query("units") units: String = "metric",
-        @Query("lang") language: String
+        @Query("lang") language: String = "fr"
     ): OpenWeatherOneCallResponse
 
     companion object {
