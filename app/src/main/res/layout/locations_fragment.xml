@@ -12,7 +12,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/autocomplete_card_view"
@@ -34,6 +36,8 @@
             android:id="@+id/locations_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
