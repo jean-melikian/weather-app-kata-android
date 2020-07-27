@@ -19,12 +19,14 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "OPEN_WEATHER_MAP_API_KEY", '\"'+getApiKey()+'\"'
+            buildConfigField "String", "OPEN_WEATHER_MAP_API_KEY", '\"'+getSecret("OPEN_WEATHER_MAP_API_KEY")+'\"'
+            buildConfigField "String", "PLACES_API_KEY", '\"'+getSecret("PLACES_API_KEY")+'\"'
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "OPEN_WEATHER_MAP_API_KEY", '\"'+getApiKey()+'\"'
+            buildConfigField "String", "OPEN_WEATHER_MAP_API_KEY", '\"'+getSecret("OPEN_WEATHER_MAP_API_KEY")+'\"'
+            buildConfigField "String", "PLACES_API_KEY", '\"'+getSecret("PLACES_API_KEY")+'\"'
         }
     }
     compileOptions {
@@ -38,6 +40,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+        exclude 'META-INF/metadata.kotlin_module'
+        exclude 'META-INF/metadata.jvm.kotlin_module'
+    }
 }
 
 dependencies {
@@ -45,6 +51,9 @@ dependencies {
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Google
+    implementation "com.google.android.libraries.places:places:2.3.0"
 
     // -- AndroidX --
     implementation 'androidx.core:core-ktx:1.3.1'
@@ -58,6 +67,10 @@ dependencies {
 
     // Material
     implementation "com.google.android.material:material:1.1.0"
+
+    // Square
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     // -- WeatherAppKata --
     implementation project(":open-weather-map-client")

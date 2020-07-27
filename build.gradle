@@ -28,10 +28,10 @@ allprojects {
     }
 }
 
-def getApiKey(){
+String getSecret(String identifier) {
     def Properties props = new Properties()
     props.load(new FileInputStream(new File('secrets.properties')))
-    return props['OPEN_WEATHER_MAP_API_KEY']
+    return props[identifier]
 }
 
 task clean(type: Delete) {
