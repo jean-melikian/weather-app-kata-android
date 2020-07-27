@@ -32,9 +32,11 @@ class WeatherDetailsFragment :
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.weatherState().observe(viewLifecycleOwner, weatherStateObserver)
-        viewModel.getCurrentWeatherForLocation(parisCoordinates.first, parisCoordinates.second)
+//        viewModel.getCurrentWeatherForLocation(parisCoordinates.first, parisCoordinates.second)
         binding.weatherRefreshLayout.setOnRefreshListener {
-            viewModel.getCurrentWeatherForLocation(parisCoordinates.first, parisCoordinates.second)
+            viewModel.currentLocation().value?.let {
+                viewModel.getCurrentWeatherForLocation(it.latitude, it.longitude)
+            }
         }
     }
 
@@ -54,7 +56,7 @@ class WeatherDetailsFragment :
                     binding.root,
                     weatherState.message.localizedMessage ?: getString(R.string.unknown_error),
                     Snackbar.LENGTH_LONG
-                )
+                ).show()
             }
         }
 

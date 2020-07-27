@@ -1,6 +1,7 @@
 package fr.ozoneprojects.weatherappkata.ui.weatherdetails
 
 import androidx.lifecycle.*
+import fr.ozoneprojects.weatherappkata.domain.models.Location
 import fr.ozoneprojects.weatherlib.WeatherRepository
 import fr.ozoneprojects.weatherlib.models.GenericError
 import fr.ozoneprojects.weatherlib.models.Success
@@ -24,9 +25,11 @@ class WeatherDetailsModelFactory(private val weatherRepository: WeatherRepositor
 
 class WeatherDetailsViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
 
+    private val currentLocation: MutableLiveData<Location> = MutableLiveData()
     private val weatherState: MutableLiveData<WeatherState> = MutableLiveData()
 
     fun weatherState(): LiveData<WeatherState> = weatherState
+    fun currentLocation(): LiveData<Location> = currentLocation
 
     fun getCurrentWeatherForLocation(latitude: Double, longitude: Double) {
         weatherState.postValue(WeatherState.Loading)
@@ -42,5 +45,10 @@ class WeatherDetailsViewModel(private val weatherRepository: WeatherRepository) 
                 }
             )
         }
+    }
+
+    fun setSelectedLocation(location: Location) {
+        currentLocation.postValue(location)
+        getCurrentWeatherForLocation(location.latitude, location.longitude)
     }
 }
