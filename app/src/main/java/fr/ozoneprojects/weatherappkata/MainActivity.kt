@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
@@ -11,12 +12,15 @@ import fr.ozoneprojects.weatherappkata.dataadapter.LocationsRepositoryImpl
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsFragment
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModel
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModelFactory
+import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModel
+import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModelFactory
 import fr.ozoneprojects.weatherappkata.ui.weatherdetails.WeatherDetailsModelFactory
 import fr.ozoneprojects.weatherappkata.ui.weatherdetails.WeatherDetailsViewModel
 import fr.ozoneprojects.weatherlib.WeatherRepositoryFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.main_activity) {
 
+    private lateinit var toolbarViewModel: ToolbarViewModel
     private lateinit var locationsViewModel: LocationsViewModel
     private lateinit var weatherDetailsViewModel: WeatherDetailsViewModel
     private lateinit var placesClient: PlacesClient
@@ -28,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
 
         initViewModels()
         placesClient = Places.createClient(this)
@@ -39,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, LocationsFragment.newInstance())
                 .commitNow()
         }
+
+        toolbarViewModel.title().observe(this, Observer {
+            supportActionBar?.title = it
+        })
     }
 
     override fun onBackPressed() {
@@ -47,6 +54,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModels() {
+        toolbarViewModel = ViewModelProvider(
+            this,
+            ToolbarViewModelFactory()
+        ).get(ToolbarViewModel::class.java)
+
         locationsViewModel = ViewModelProvider(
             this,
             LocationsViewModelFactory(LocationsRepositoryImpl(locationsDataSource))

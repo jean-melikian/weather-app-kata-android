@@ -11,6 +11,7 @@ import fr.ozoneprojects.weatherappkata.R
 import fr.ozoneprojects.weatherappkata.core.unixToPrettyFormat
 import fr.ozoneprojects.weatherappkata.databinding.WeatherDetailsFragmentBinding
 import fr.ozoneprojects.weatherappkata.ui.ViewBindingFragment
+import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModel
 import fr.ozoneprojects.weatherlib.WeatherIconMapper
 import fr.ozoneprojects.weatherlib.models.datasource.OpenWeatherOneCallResponse
 import java.util.*
@@ -19,9 +20,8 @@ import kotlin.math.roundToInt
 class WeatherDetailsFragment :
     ViewBindingFragment<WeatherDetailsFragmentBinding>(R.layout.weather_details_fragment) {
 
-    private val parisCoordinates: Pair<Double, Double> = 48.8534 to 2.3488
-
-    private val viewModel: WeatherDetailsViewModel by activityViewModels()
+    private val toolbarViewModel: ToolbarViewModel by activityViewModels()
+    private val weatherDetailsViewModel: WeatherDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,12 +31,18 @@ class WeatherDetailsFragment :
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.weatherState().observe(viewLifecycleOwner, weatherStateObserver)
-//        viewModel.getCurrentWeatherForLocation(parisCoordinates.first, parisCoordinates.second)
+        weatherDetailsViewModel.weatherState().observe(viewLifecycleOwner, weatherStateObserver)
         binding.weatherRefreshLayout.setOnRefreshListener {
-            viewModel.currentLocation().value?.let {
-                viewModel.getCurrentWeatherForLocation(it.latitude, it.longitude)
+            weatherDetailsViewModel.currentLocation().value?.let {
+                weatherDetailsViewModel.getCurrentWeatherForLocation(it.latitude, it.longitude)
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        weatherDetailsViewModel.currentLocation().value?.let {
+            toolbarViewModel.setTitle(it.name)
         }
     }
 

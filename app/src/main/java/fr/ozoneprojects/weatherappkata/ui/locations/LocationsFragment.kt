@@ -17,6 +17,7 @@ import fr.ozoneprojects.weatherappkata.core.VerticalSpaceItemDecorator
 import fr.ozoneprojects.weatherappkata.databinding.LocationsFragmentBinding
 import fr.ozoneprojects.weatherappkata.domain.models.Location
 import fr.ozoneprojects.weatherappkata.ui.ViewBindingFragment
+import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModel
 import fr.ozoneprojects.weatherappkata.ui.weatherdetails.WeatherDetailsFragment
 import fr.ozoneprojects.weatherappkata.ui.weatherdetails.WeatherDetailsViewModel
 
@@ -24,6 +25,7 @@ class LocationsFragment :
     ViewBindingFragment<LocationsFragmentBinding>(R.layout.locations_fragment),
     LocationsInteractor {
 
+    private val toolbarViewModel: ToolbarViewModel by activityViewModels()
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private val weatherViewModel: WeatherDetailsViewModel by activityViewModels()
 
@@ -86,6 +88,11 @@ class LocationsFragment :
         }
 
         locationsViewModel.getAllUserLocations()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        toolbarViewModel.setTitle(getString(R.string.app_name))
     }
 
     private fun setupLocationsRecycler() {
