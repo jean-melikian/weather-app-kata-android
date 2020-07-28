@@ -27,44 +27,50 @@
 
         <TextView
             android:id="@+id/temperature_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.MainTemperature"
-            app:layout_constraintBottom_toBottomOf="@id/weather_image_view"
+            app:layout_constraintBottom_toTopOf="@+id/temperature_feels_like_text_view"
             app:layout_constraintEnd_toStartOf="@id/weather_image_view"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/weather_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/date_time_text_view"
             tools:text="25°C" />
 
         <TextView
             android:id="@+id/temperature_feels_like_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/weather_image_view"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/weather_description_text_view"
+            app:layout_constraintEnd_toStartOf="@id/weather_description_text_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weather_image_view"
+            app:layout_constraintTop_toTopOf="@id/weather_description_text_view"
             tools:text="Température ressentie: 25°" />
 
         <ImageView
             android:id="@+id/weather_image_view"
-            android:layout_width="@dimen/weather_icon_size"
+            android:layout_width="0dp"
             android:layout_height="@dimen/weather_icon_size"
             android:adjustViewBounds="true"
             android:contentDescription="@string/weather_icon_description"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/temperature_text_view"
-            app:layout_constraintTop_toBottomOf="@id/date_time_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/date_time_text_view"
             tools:src="@drawable/ic_01d" />
 
         <TextView
             android:id="@+id/weather_description_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/weather_image_view"
+            android:ellipsize="marquee"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@+id/temperature_text_view"
             app:layout_constraintStart_toStartOf="@id/weather_image_view"
-
             app:layout_constraintTop_toBottomOf="@id/weather_image_view"
             tools:text="Ensoleillé" />
 
