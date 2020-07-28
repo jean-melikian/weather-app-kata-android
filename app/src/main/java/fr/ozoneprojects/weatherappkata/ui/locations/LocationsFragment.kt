@@ -68,11 +68,13 @@ class LocationsFragment :
                     }
 
                     override fun onError(status: Status) {
-                        Snackbar.make(
-                            binding.root,
-                            status.statusMessage ?: getString(R.string.unknown_error),
-                            Snackbar.LENGTH_LONG
-                        ).show()
+                        if (!status.isCanceled) {
+                            Snackbar.make(
+                                binding.root,
+                                "${status.statusCode}: ${status.statusMessage ?: getString(R.string.unknown_error)}",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
                     }
                 })
             }
