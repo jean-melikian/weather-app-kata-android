@@ -13,7 +13,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.snackbar.Snackbar
 import fr.ozoneprojects.weatherappkata.R
-import fr.ozoneprojects.weatherappkata.core.SpacingItemDecorator
+import fr.ozoneprojects.weatherappkata.core.VerticalSpaceItemDecorator
 import fr.ozoneprojects.weatherappkata.databinding.LocationsFragmentBinding
 import fr.ozoneprojects.weatherappkata.domain.models.Location
 import fr.ozoneprojects.weatherappkata.ui.ViewBindingFragment
@@ -92,7 +92,7 @@ class LocationsFragment :
             (0 until itemDecorationCount).map {
                 removeItemDecorationAt(it)
             }
-            addItemDecoration(SpacingItemDecorator(resources.getDimensionPixelOffset(R.dimen.spacing_small)))
+            addItemDecoration(VerticalSpaceItemDecorator(resources.getDimensionPixelOffset(R.dimen.spacing_small)))
         }
     }
 

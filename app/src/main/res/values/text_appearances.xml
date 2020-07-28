@@ -13,11 +13,7 @@
     </style>
 
     <style name="TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">?colorAccent</item>
-        <item name="android:shadowColor">@android:color/white</item>
-        <item name="android:shadowDx">2</item>
-        <item name="android:shadowDy">2</item>
-        <item name="android:shadowRadius">1</item>
+        <item name="android:textColor">?colorOnPrimarySurface</item>
     </style>
 
     <style name="TextAppearance.Body" parent="TextAppearance.AppCompat.Body1">

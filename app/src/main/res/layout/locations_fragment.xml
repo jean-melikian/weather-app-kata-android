@@ -38,6 +38,7 @@
             android:layout_height="0dp"
             android:clipChildren="false"
             android:clipToPadding="false"
+            android:paddingTop="@dimen/spacing_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
