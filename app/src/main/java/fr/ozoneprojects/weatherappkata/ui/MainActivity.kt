@@ -1,4 +1,4 @@
-package fr.ozoneprojects.weatherappkata
+package fr.ozoneprojects.weatherappkata.ui
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import fr.ozoneprojects.weatherappkata.BuildConfig
+import fr.ozoneprojects.weatherappkata.R
 import fr.ozoneprojects.weatherappkata.dataadapter.LocationsRepositoryImpl
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsFragment
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModel
