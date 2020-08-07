@@ -8,9 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.material.snackbar.Snackbar
 import fr.ozoneprojects.weatherappkata.BuildConfig
 import fr.ozoneprojects.weatherappkata.R
 import fr.ozoneprojects.weatherappkata.dataadapter.LocationsRepositoryImpl
+import fr.ozoneprojects.weatherappkata.ui.error.ErrorDisplay
+import fr.ozoneprojects.weatherappkata.ui.error.ErrorDisplayViewModel
+import fr.ozoneprojects.weatherappkata.ui.error.ErrorDisplayViewModelFactory
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsFragment
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModel
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModelFactory
@@ -23,9 +27,12 @@ import fr.ozoneprojects.weatherlib.WeatherRepositoryFactory
 class MainActivity : AppCompatActivity(R.layout.main_activity) {
 
     private lateinit var toolbarViewModel: ToolbarViewModel
+    private lateinit var errorDisplayViewModel: ErrorDisplayViewModel
     private lateinit var locationsViewModel: LocationsViewModel
     private lateinit var weatherDetailsViewModel: WeatherDetailsViewModel
     private lateinit var placesClient: PlacesClient
+
+    private var snackbar: Snackbar? = null
 
     private val locationsDataSource: SharedPreferences by lazy {
         getSharedPreferences(SHARED_PREFERENCES_LOCATIONS, Context.MODE_PRIVATE)
@@ -48,6 +55,24 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
         toolbarViewModel.title().observe(this, Observer {
             supportActionBar?.title = it
         })
+
+        window.peekDecorView()?.let {
+            snackbar = Snackbar.make(it, "", Snackbar.LENGTH_LONG)
+        }
+
+        errorDisplayViewModel.errorState().observe(this, Observer { errorState ->
+            snackbar?.let { snack ->
+                when (errorState) {
+                    is ErrorDisplay.NoInternet -> {
+                        snack.setText(
+                            errorState.message.message ?: getString(R.string.unknown_error)
+                        ).show()
+                    }
+                    is ErrorDisplay.None -> snack.dismiss()
+                    else -> snack.dismiss()
+                }
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -60,6 +85,11 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
             this,
             ToolbarViewModelFactory()
         ).get(ToolbarViewModel::class.java)
+
+        errorDisplayViewModel = ViewModelProvider(
+            this,
+            ErrorDisplayViewModelFactory()
+        ).get(ErrorDisplayViewModel::class.java)
 
         locationsViewModel = ViewModelProvider(
             this,

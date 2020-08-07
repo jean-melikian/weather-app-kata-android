@@ -6,11 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import com.google.android.gms.common.api.Status
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.snackbar.Snackbar
 import fr.ozoneprojects.weatherappkata.R
 import fr.ozoneprojects.weatherappkata.core.VerticalSpaceItemDecorator
@@ -31,8 +26,6 @@ class LocationsFragment :
 
     private val locationsAdapter: LocationsAdapter = LocationsAdapter(this)
 
-    private var autoCompleteFragment: AutocompleteSupportFragment? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,44 +35,6 @@ class LocationsFragment :
         super.onActivityCreated(savedInstanceState)
 
         setupLocationsRecycler()
-
-        autoCompleteFragment =
-            (childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment).also { autoCompleteFragment ->
-
-                autoCompleteFragment.setTypeFilter(TypeFilter.CITIES)
-                autoCompleteFragment.setPlaceFields(
-                    listOf(
-                        Place.Field.ID,
-                        Place.Field.NAME,
-                        Place.Field.LAT_LNG
-                    )
-                )
-
-                autoCompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-                    override fun onPlaceSelected(place: Place) {
-                        place.latLng?.let { latLng ->
-                            val newLocation =
-                                Location(
-                                    place.id!!,
-                                    place.name!!,
-                                    latLng.latitude,
-                                    latLng.longitude
-                                )
-                            locationsViewModel.addNewLocation(newLocation)
-                        }
-                    }
-
-                    override fun onError(status: Status) {
-                        if (!status.isCanceled) {
-                            Snackbar.make(
-                                binding.root,
-                                "${status.statusCode}: ${status.statusMessage ?: getString(R.string.unknown_error)}",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-                })
-            }
 
         locationsViewModel.locationsState().observe(viewLifecycleOwner, locationsObserver)
 
