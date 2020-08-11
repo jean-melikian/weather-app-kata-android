@@ -1,8 +1,9 @@
 package fr.ozoneprojects.weatherappkata.ui.locations
 
 import androidx.lifecycle.*
-import fr.ozoneprojects.weatherappkata.dataadapter.LocationsRepository
 import fr.ozoneprojects.weatherappkata.domain.models.Location
+import fr.ozoneprojects.weatherappkata.ui.locations.dataadapter.LocationsRepository
+import fr.ozoneprojects.weatherappkata.ui.locations.places.dataadapter.PlacesRepository
 import kotlinx.coroutines.launch
 
 sealed class LocationsState {

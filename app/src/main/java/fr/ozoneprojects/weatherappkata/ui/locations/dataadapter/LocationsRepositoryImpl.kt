@@ -1,4 +1,4 @@
-package fr.ozoneprojects.weatherappkata.dataadapter
+package fr.ozoneprojects.weatherappkata.ui.locations.dataadapter
 
 import android.content.SharedPreferences
 import com.squareup.moshi.JsonAdapter
@@ -8,7 +8,8 @@ import fr.ozoneprojects.weatherappkata.domain.models.Location
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LocationsRepositoryImpl(private val dataSource: SharedPreferences) : LocationsRepository {
+class LocationsRepositoryImpl(private val dataSource: SharedPreferences) :
+    LocationsRepository {
 
     private val moshi: Moshi = Moshi.Builder().apply {
         add(KotlinJsonAdapterFactory())

@@ -1,4 +1,4 @@
-package fr.ozoneprojects.weatherappkata.dataadapter
+package fr.ozoneprojects.weatherappkata.ui.locations.dataadapter
 
 import fr.ozoneprojects.weatherappkata.domain.models.Location
 

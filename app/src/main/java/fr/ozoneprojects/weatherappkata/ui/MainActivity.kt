@@ -11,13 +11,13 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.snackbar.Snackbar
 import fr.ozoneprojects.weatherappkata.BuildConfig
 import fr.ozoneprojects.weatherappkata.R
-import fr.ozoneprojects.weatherappkata.dataadapter.LocationsRepositoryImpl
 import fr.ozoneprojects.weatherappkata.ui.error.ErrorDisplay
 import fr.ozoneprojects.weatherappkata.ui.error.ErrorDisplayViewModel
 import fr.ozoneprojects.weatherappkata.ui.error.ErrorDisplayViewModelFactory
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsFragment
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModel
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModelFactory
+import fr.ozoneprojects.weatherappkata.ui.locations.dataadapter.LocationsRepositoryImpl
 import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModel
 import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModelFactory
 import fr.ozoneprojects.weatherappkata.ui.weatherdetails.WeatherDetailsModelFactory
@@ -93,7 +93,11 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
 
         locationsViewModel = ViewModelProvider(
             this,
-            LocationsViewModelFactory(LocationsRepositoryImpl(locationsDataSource))
+            LocationsViewModelFactory(
+                LocationsRepositoryImpl(
+                    locationsDataSource
+                )
+            )
         ).get(LocationsViewModel::class.java)
 
         weatherDetailsViewModel = ViewModelProvider(
