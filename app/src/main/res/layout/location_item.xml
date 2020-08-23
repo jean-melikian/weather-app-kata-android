@@ -17,16 +17,17 @@
             android:id="@+id/icon_location_image_view"
             android:layout_width="@dimen/location_icon_size"
             android:layout_height="@dimen/location_icon_size"
-            android:tint="@color/colorAccent"
+            android:tint="?colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_location" />
+            app:srcCompat="@drawable/ic_city" />
 
         <TextView
             android:id="@+id/location_name_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="?colorOnSurface"
             android:layout_marginStart="@dimen/spacing_medium"
             android:textAppearance="?android:textAppearanceLarge"
             app:layout_constraintBottom_toBottomOf="@id/icon_location_image_view"
@@ -40,7 +41,7 @@
             android:layout_width="@dimen/accessible_touch_size"
             android:layout_height="@dimen/accessible_touch_size"
             android:src="@android:drawable/ic_menu_delete"
-            android:tint="@color/design_default_color_error"
+            android:tint="?colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"

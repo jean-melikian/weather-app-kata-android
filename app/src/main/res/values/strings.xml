@@ -5,4 +5,8 @@
     <string name="date_time_pretty_format">"dd MMMM 'à' HH:mm"</string>
     <string name="temperature_celsius_format">%d°C</string>
     <string name="temperature_feels_like_celsius_format">Température ressentie: %d°C</string>
+    <string name="unavailable">Indisponible</string>
+
+    <string name="fine_location_permission_rationale">Nous avons besoin de votre permission pour accéder à votre géolocalisation afin de vous informer de la météo locale</string>
+    <string name="open_maps_button_text">Ouvrir la carte</string>
 </resources>

@@ -10,7 +10,8 @@
     </style>
 
     <style name="TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">?colorOnPrimarySurface</item>
+        <item name="fontFamily">@font/raleway_semi_bold</item>
+        <item name="android:fontFamily">@font/raleway_semi_bold</item>
     </style>
 
     <style name="TextAppearance.Body" parent="TextAppearance.AppCompat.Body1">

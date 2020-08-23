@@ -21,12 +21,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "OPEN_WEATHER_MAP_API_KEY", '\"'+getSecret("OPEN_WEATHER_MAP_API_KEY")+'\"'
             buildConfigField "String", "PLACES_API_KEY", '\"'+getSecret("PLACES_API_KEY")+'\"'
+            resValue "string", "GOOGLE_MAPS_API_KEY", '\"'+getSecret("GOOGLE_MAPS_API_KEY")+'\"'
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "OPEN_WEATHER_MAP_API_KEY", '\"'+getSecret("OPEN_WEATHER_MAP_API_KEY")+'\"'
             buildConfigField "String", "PLACES_API_KEY", '\"'+getSecret("PLACES_API_KEY")+'\"'
+            resValue "string", "GOOGLE_MAPS_API_KEY", '\"'+getSecret("GOOGLE_MAPS_API_KEY")+'\"'
         }
     }
     compileOptions {
@@ -57,16 +59,18 @@ dependencies {
 
     // -- AndroidX --
     implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "androidx.fragment:fragment-ktx:1.2.5"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation "androidx.activity:activity:$activity_version"
+    implementation "androidx.activity:activity-ktx:$activity_version"
 
     // Material
-    implementation "com.google.android.material:material:1.1.0"
+    implementation "com.google.android.material:material:1.2.0"
 
     // Square
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
@@ -75,6 +79,7 @@ dependencies {
     // -- WeatherAppKata --
     implementation project(":weatherlib")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
     // Tests
     testImplementation "junit:junit:$junit_version"

@@ -1,5 +1,6 @@
 package fr.ozoneprojects.weatherappkata.ui.locations.places
 
+import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.model.Place
@@ -20,16 +21,15 @@ class CitiesAutoCompleteFragment : AutocompleteSupportFragment() {
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private val errorDisplayViewModel: ErrorDisplayViewModel by activityViewModels()
 
-    init {
+    override fun onCreate(bundle: Bundle?) {
+        super.onCreate(bundle)
         this.setTypeFilter(TypeFilter.CITIES)
         this.setPlaceFields(
-            listOf(
-                Place.Field.ID,
-                Place.Field.NAME,
-                Place.Field.LAT_LNG
-            )
+            locationsViewModel.getPlacesRequiredFields()
         )
+    }
 
+    init {
         this.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 place.latLng?.let { latLng ->

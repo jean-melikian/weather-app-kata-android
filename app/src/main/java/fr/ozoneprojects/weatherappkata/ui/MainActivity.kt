@@ -6,8 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.snackbar.Snackbar
 import fr.ozoneprojects.weatherappkata.BuildConfig
 import fr.ozoneprojects.weatherappkata.R
@@ -18,6 +16,7 @@ import fr.ozoneprojects.weatherappkata.ui.locations.LocationsFragment
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModel
 import fr.ozoneprojects.weatherappkata.ui.locations.LocationsViewModelFactory
 import fr.ozoneprojects.weatherappkata.ui.locations.dataadapter.LocationsRepositoryImpl
+import fr.ozoneprojects.weatherappkata.ui.locations.places.dataadapter.PlacesRepositoryImpl
 import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModel
 import fr.ozoneprojects.weatherappkata.ui.toolbar.ToolbarViewModelFactory
 import fr.ozoneprojects.weatherappkata.ui.weatherdetails.WeatherDetailsModelFactory
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
     private lateinit var errorDisplayViewModel: ErrorDisplayViewModel
     private lateinit var locationsViewModel: LocationsViewModel
     private lateinit var weatherDetailsViewModel: WeatherDetailsViewModel
-    private lateinit var placesClient: PlacesClient
 
     private var snackbar: Snackbar? = null
 
@@ -43,7 +41,6 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
         super.onCreate(savedInstanceState)
 
         initViewModels()
-        placesClient = Places.createClient(this)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -63,6 +60,13 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
         errorDisplayViewModel.errorState().observe(this, Observer { errorState ->
             snackbar?.let { snack ->
                 when (errorState) {
+                    is ErrorDisplay.MissingLocationPermission -> {
+//                        requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))
+                        snack.setText(
+                            errorState.message.message
+                                ?: getString(R.string.fine_location_permission_rationale)
+                        ).show()
+                    }
                     is ErrorDisplay.NoInternet -> {
                         snack.setText(
                             errorState.message.message ?: getString(R.string.unknown_error)
@@ -96,7 +100,8 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
             LocationsViewModelFactory(
                 LocationsRepositoryImpl(
                     locationsDataSource
-                )
+                ),
+                PlacesRepositoryImpl(this)
             )
         ).get(LocationsViewModel::class.java)
 
